@@ -14,7 +14,7 @@ public class Program {
 		c1.setIdade(63);
 		c1.setDataCadastro(new Date());
 
-		// c1Dao.save(c1);
+		c1Dao.save(c1);
 
 		// Atualizar contato:
 		Contato updateContact = new Contato();
@@ -26,13 +26,15 @@ public class Program {
 
 		c1Dao.update(updateContact);
 
+		// Delete de registros:
+
+		// c1Dao.deleteByID(3);
+
 		// Visualização dos registros:
 
 		for (Contato c : c1Dao.getContatos()) {
-			System.out.println("\nContato: " + c.getNome());
+			System.out.println("\nContato: " + c.getNome() + ", ID = " + c.getId());
 		}
-
-		// Delete de registros:
 
 	}
 

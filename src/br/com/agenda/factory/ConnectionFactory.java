@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	private static final String USERNAME = "root";
 
 	// Senha do banco
-	private static final String PASSWORD = "88950061Teamo";
+	private static final String PASSWORD = "";
 
 	// Caminho do banco de dados
 	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/agenda";
