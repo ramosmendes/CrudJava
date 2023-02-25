@@ -3,6 +3,9 @@ package br.com.agenda.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.agenda.factory.ConnectionFactory;
 import br.com.agenda.model.Contato;
@@ -53,5 +56,66 @@ public class ContatoDAO {
 				e2.printStackTrace();
 			}
 		}
+	}
+
+	public List<Contato> getContatos() {
+		String sql = "SELECT * FROM contatos";
+
+		List<Contato> contacts = new ArrayList<>();
+
+		Connection conn = null;
+		PreparedStatement pstm = null;
+
+		// Classe que recupera os dados do database ****SELECT****
+		ResultSet rset = null;
+
+		try {
+			conn = ConnectionFactory.createConnectionToMySql();
+
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+
+			rset = pstm.executeQuery();
+
+			while (rset.next()) {
+				Contato cont = new Contato();
+
+				// Recuperar ID
+				cont.setId(rset.getInt("id"));
+
+				// Recuperar Nome
+				cont.setNome(rset.getString("nome"));
+
+				// Recuperar Idade
+				cont.setIdade(rset.getInt("idade"));
+
+				// Recuperar Datas
+				cont.setDataCadastro(rset.getDate("dataCadastro"));
+
+				contacts.add(cont);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rset != null) {
+					rset.close();
+				}
+
+				if (pstm != null) {
+					pstm.close();
+				}
+
+				if (conn != null) {
+					conn.close();
+
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		return contacts;
+
 	}
 }
