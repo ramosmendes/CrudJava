@@ -19,7 +19,7 @@ public class ConnectionFactory {
 	 */
 
 	public static Connection createConnectionToMySql() throws Exception {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		// Cria a conexão com o banco de Dados
 		Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
