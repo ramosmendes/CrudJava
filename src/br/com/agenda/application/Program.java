@@ -1,41 +1,55 @@
 package br.com.agenda.application;
 
 import java.util.Date;
+import java.util.Scanner;
 
 import br.com.agenda.dao.ContatoDAO;
 import br.com.agenda.model.Contato;
 
 public class Program {
 	public static void main(String[] args) {
-		ContatoDAO c1Dao = new ContatoDAO();
+		Scanner in = new Scanner(System.in);
+		// Salvar registros
+		try {
+			ContatoDAO c1Dao = new ContatoDAO();
+			Contato c1 = new Contato();
+			System.out.print("Digite seu nome: ");
+			String nome = in.nextLine();
+			System.out.print("Digite sua idade: ");
+			Integer idade = in.nextInt();
 
-		Contato c1 = new Contato();
-		c1.setNome("Maria Madalena");
-		c1.setIdade(63);
-		c1.setDataCadastro(new Date());
+			c1.setNome(nome);
+			c1.setIdade(idade);
+			c1.setDataCadastro(new Date());
 
-		c1Dao.save(c1);
+			c1Dao.save(c1);
 
-		// Atualizar contato:
-		Contato updateContact = new Contato();
+			// Atualizar contato:
 
-		updateContact.setNome("Rafaela Maria");
-		updateContact.setIdade(45);
-		updateContact.setDataCadastro(new Date());
-		updateContact.setId(2);// Número que está no banco de Dados
+			/*
+			 * Contato updateContact = new Contato();
+			 * 
+			 * updateContact.setNome("Rafaela Maria"); updateContact.setIdade(45);
+			 * updateContact.setDataCadastro(new Date()); updateContact.setId(2);// Número
+			 * que está no banco de Dados
+			 * 
+			 * c1Dao.update(updateContact);
+			 */
 
-		c1Dao.update(updateContact);
+			// Delete de registros:
 
-		// Delete de registros:
+			// c1Dao.deleteByID(3);
 
-		// c1Dao.deleteByID(3);
+			// Visualização dos registros:
 
-		// Visualização dos registros:
-
-		for (Contato c : c1Dao.getContatos()) {
-			System.out.println("\nContato: " + c.getNome() + ", ID = " + c.getId());
+			for (Contato c : c1Dao.getContatos()) {
+				System.out.println("\nContato: " + c.getNome() + ", Idade = " + c.getIdade());
+			}
+		} catch (Exception e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 
+		in.close();
 	}
 
 }
