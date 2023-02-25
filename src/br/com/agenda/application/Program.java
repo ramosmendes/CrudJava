@@ -16,11 +16,23 @@ public class Program {
 
 		// c1Dao.save(c1);
 
-		// Visualização dos registros;
+		// Atualizar contato:
+		Contato updateContact = new Contato();
+
+		updateContact.setNome("Rafaela Maria");
+		updateContact.setIdade(45);
+		updateContact.setDataCadastro(new Date());
+		updateContact.setId(2);// Número que está no banco de Dados
+
+		c1Dao.update(updateContact);
+
+		// Visualização dos registros:
 
 		for (Contato c : c1Dao.getContatos()) {
 			System.out.println("\nContato: " + c.getNome());
 		}
+
+		// Delete de registros:
 
 	}
 
